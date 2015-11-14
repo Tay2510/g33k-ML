@@ -1,0 +1,12 @@
+function [p] = sigmoidProb(y, x, w)
+    % y : label
+    % x : single row data (1, k)
+    % w : matrix of weights (k, y)
+
+    prob = 1/(1 + exp(x*w(:, y)));
+    if y == 1
+        p = 1 - prob;
+    else
+        p = prob;
+    end
+end
