@@ -1,5 +1,10 @@
-function fitLR(xTrain, yTrain, xTest, yTest, nIter)
+clc
 tic
+%% Use SGD (no nIter)
+xTrain = XTrainFeat;
+yTrain = YTrain;
+xTest = XTestFeat;
+yTest = YTest;
 
 [NTrain MTrain] = size(xTrain);    % N: samples ; M: features
 [NTest MTest] = size(xTest);
@@ -13,26 +18,17 @@ xTestTemp = [oneColumnTest xTest];
 % set w0
 w0 = rand(MTrain + 1, 10);
 
-% Training
-display('Training...');
-if nIter > 0
-    % use batch gradient ascent
-    weights = LRTrain(xTrainTemp, yTrain, w0, nIter);
-else
-    % use stochastic gradient ascent
-    weights = LRTrainSG(xTrainTemp, yTrain, w0);
-end
+% Training (stochastic gradient ascent)
+display('Training...');    
+weights = LRTrainSG(xTrainTemp, yTrain, w0);
 
 % Classification
 display('Classifying...');
 YPredict = LRClassify(xTestTemp, weights);
 
 % evalutaion
-yTest = double(yTest);
 cMat = confusionmat(yTest, YPredict);
-hogAccLRSG = sum(diag(cMat)) / sum(sum(cMat));
-display(hogAccLRSG);
+hogAcc = sum(diag(cMat)) / sum(sum(cMat));
+display(hogAcc);
 
 toc
-end
-
