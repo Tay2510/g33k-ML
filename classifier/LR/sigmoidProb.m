@@ -11,7 +11,7 @@ function p = sigmoidProb(y, x, w)
 probSum = 0;
     
 for j = 0 : 8
-    probSum = probSum + exp(x*w(:, j + 1));
+    probSum = probSum + exp(x*w(:, j + 1));   
 end
     
 if y == 9

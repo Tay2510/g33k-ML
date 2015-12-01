@@ -1,9 +1,9 @@
 clc
 tic
 %% Use SGD (no nIter)
-xTrain = XTrainFeat;
+xTrain = normc(XTrainFeat);
 yTrain = YTrain;
-xTest = XTestFeat;
+xTest = normc(XTestFeat);
 yTest = YTest;
 
 [NTrain MTrain] = size(xTrain);    % N: samples ; M: features

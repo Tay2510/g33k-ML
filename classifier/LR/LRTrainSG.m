@@ -22,8 +22,8 @@ for i = 1: datalength
         increment = zeros(featureDim, 1);
         booleanTempVar = 0;
         if label == y
-            booleanTempVar = 1;
-        end
+            booleanTempVar = 1;            
+        end        
         % iteration for all features
         for g = 1: featureDim            
             sigP = sigmoidProb(label, sample, w);
@@ -31,6 +31,7 @@ for i = 1: datalength
             display([num2str(i) '/' num2str(y) '/' num2str(g) ':' num2str(sigP)]);
         end
         w(:, y + 1) = w(:, y + 1) + e*increment;
+        display(w(:));
     end    
 end
 end
