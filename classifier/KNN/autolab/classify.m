@@ -1,9 +1,21 @@
-function y = classify(Model, X)
+function [y] = classify(Model, X)
+
+k = 10;
+cellSize = 4;
+
+% Extract test HoG
+%================================================
+xTest = [];
+size_XTest = size(X, 1);
+for i = 1 : size_XTest
+    im = im2single(reshape(X(i,:), 32, 32, 3));
+    hog = vl_hog(im, cellSize);
+    xTest = [xTest; hog(:)'];    
+end
+%================================================
 
 xTrain = Model.xTrain;
 yTrain = Model.yTrain;
-xTest = X;
-k = 10;
 [NTrain MTrain] = size(xTrain);
 [NTest, MTest] = size(xTest);
 
