@@ -1,6 +1,7 @@
 clc
+tic
 %% KNN
-K = [5 10 15 20];
+K = [5];
 
 xTrain = XTrainFeat;
 yTrain = YTrain;
@@ -18,3 +19,4 @@ for j = 1 : sizeK
     hogAccKNNs(j) = score;
     display(['k = ' num2str(k) ': ' num2str(score)]);
 end
+toc
