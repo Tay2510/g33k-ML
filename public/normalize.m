@@ -3,10 +3,9 @@ function [Xnew] = normalize(Xold)
 Xnew = zeros(M, N);
 for n = 1 : N
     column = Xold(:, n);
-    Max = max(column);
-    Min = min(column);
-    d = Max - Min;
-    Xnew(:, n) = (Xold(:, n) - Min)./d;
+    mu = mean(column);
+    sigma = sqrt(var(column));    
+    Xnew(:, n) = (Xold(:, n) - mu)./sigma;
 end
 end
 
