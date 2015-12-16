@@ -11,9 +11,9 @@ yTest = YTest;
 
 % Modify data by inserting column of ones
 oneColumnTrain = ones(NTrain, 1);
-xTrainTemp = [oneColumnTrain xTrain];
+xTrainTemp = [oneColumnTrain normalize(xTrain)];
 oneColumnTest = ones(NTest, 1);
-xTestTemp = [oneColumnTest xTest];
+xTestTemp = [oneColumnTest normalize(xTest)];
 
 % set w0
 w0 = rand(MTrain + 1, 10);

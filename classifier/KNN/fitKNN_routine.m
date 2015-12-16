@@ -1,7 +1,7 @@
 clc
 tic
 %% KNN
-K = [5];
+K = [23];
 
 xTrain = XTrainFeat;
 yTrain = YTrain;

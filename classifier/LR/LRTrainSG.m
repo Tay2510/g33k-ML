@@ -8,7 +8,7 @@ function [w] = LRTrainSG(xTrain, yTrain, w0)
 % [Output] : a trained matrix of weights 
 
 % Stochastic Gradient Ascent
-e = 0.1;    % eta, a coefficient for gradient step modification         
+e = 0.0001;    % eta, a coefficient for gradient step modification         
 w = w0;
 featureDim = length(w0);        % featureDim = M + 1
 datalength = length(yTrain);    % datalength = N
