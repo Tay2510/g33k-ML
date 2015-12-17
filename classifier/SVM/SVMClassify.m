@@ -1,26 +1,35 @@
-function [F] = SVMClassify(Model, X)
-tic
-xTest = X;
-[NTest MTest] = size(xTest);
-yTest = zeros(NTest, 1);
+function [y] = SVMClassify(Model, X)
 
+[NTest MTest] = size(X);
+Y = Model.yTrain;
+l = length(Y);
 classNum = length(Model.alphaCell);
-epsilon = 0.0001;   
-G = (Model.XTrain)*(Model.XTrain)';
 F = zeros(NTest, classNum);
+K = Model.XTrain*(Model.XTrain)';
+C = Model.C;
+
 for k = 1 : classNum
-   alpha = Model.alphaCell{k};   
-   SVIndex = find(Model.alphaCell{k} > epsilon & Model.alphaCell{k} < (Model.C - epsilon));   
-   SV = Model.XTrain(SVIndex, :); size(SV)
-   a = alpha(SVIndex);              size(a)
-   y = double(Model.yTrain(SVIndex));    size(y)
-   b = mean(1./y - G(SV, :)*(alpha.*y));
+   alpha = Model.alphaCell{k};  
+   alpha(alpha < C*0.00001) = 0;
+   alpha(alpha > C*0.999999999) = C;
+   SVIndex = find(alpha > 0 & alpha < C);      
+   SV = Model.XTrain(SVIndex, :);    
+   ysv = double(Model.yTrain(SVIndex));          
+   svone = zeros(l, 1); 
+   svone(SVIndex, 1) = 1;
+   b = svone'*(Y - ((alpha.*Y)'*K')')/sum(svone);
+   Ki = SV*X';
+   temp = Ki'*(alpha(SVIndex).*ysv) + b ;     
    
-   for n = 1 : NTest
-       xNew = xTest(n, :)';              
-       F(n, k) = sum(a.*y.*(SV*xNew)) + b;
-   end
+   F(:, k) = temp;   
 end
 
-toc
+y = zeros(NTest, 1);
+for n = 1 : NTest    
+    test = F(n, :);
+    [M I] = max(test);
+    label = I(1) - 1;
+    y(n) = label;
+end
+
 end

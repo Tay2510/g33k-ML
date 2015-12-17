@@ -5,8 +5,7 @@ xTrain = double(X);
 yTrain = double(Y);
 ySVM = yTrain;  
 [NTrain MTrain] = size(xTrain);
-
-C = (1/NTrain);          % for non-linear SVM
+C = 0.003;
 classNum = 10;           % 0~9
 
 K = xTrain*xTrain';      % linear kernel
@@ -16,13 +15,14 @@ Model.XTrain = xTrain;
 Model.yTrain = yTrain;
 Model.C = C;
 
-for n = 1 : classNum
-    display(n);
+for n = 1 : classNum    
     ySVM = (-1)*ones(NTrain, 1);
     label = n - 1;
     [rowIndex colIndex] = find(yTrain == label);
     ySVM(rowIndex) = 1;
-        
+    
+    display(length(find(ySVM > 0)));    
+    
     H = ySVM*(ySVM').*K;
     f = -1*ones(NTrain, 1);
     A = [];
