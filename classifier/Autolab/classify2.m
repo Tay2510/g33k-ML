@@ -1,4 +1,4 @@
-function [y] = classify(Model2, X)
+function [y] = classify2(Model2, X)
 
 cellSize = 4;
 % Extract test HoG

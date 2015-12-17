@@ -5,7 +5,7 @@ yTrain = double(Y);
 ySVM = yTrain;  
 [NTrain MTrain] = size(xTrain);
 C = 0.025;
-classNum = 10;           % 0~9
+classNum = 1;           % 0~9
 
 K = xTrain*xTrain';      % linear kernel
 

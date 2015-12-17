@@ -1,4 +1,4 @@
-function [ Y ] = classify( Model1,X )
+function [Y] = classify1(Model1, X)
 
 XTrain=X;
 cellSize = 8;
