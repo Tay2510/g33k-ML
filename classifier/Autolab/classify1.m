@@ -1,4 +1,4 @@
-function [ Y ] = classify( Model,X )
+function [ Y ] = classify( Model1,X )
 
 XTrain=X;
 cellSize = 8;
@@ -17,10 +17,10 @@ XTrainFeat=double(XTrainFeat);
 
 Y=zeros(N,1);
 mid=497;
-w1=Model.w1;
-w2=Model.w2;
-a=Model.a;
-b=Model.b;
+w1=Model1.w1;
+w2=Model1.w2;
+a=Model1.a;
+b=Model1.b;
 for i=1:1:N
     x=XTrainFeat(i,:);
     for j=1:1:mid

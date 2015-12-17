@@ -1,11 +1,10 @@
 function Model = SVMTrain(X, Y)
-tic
 
 xTrain = double(X);
 yTrain = double(Y);
 ySVM = yTrain;  
 [NTrain MTrain] = size(xTrain);
-C = 0.003;
+C = 0.025;
 classNum = 10;           % 0~9
 
 K = xTrain*xTrain';      % linear kernel
@@ -37,5 +36,5 @@ for n = 1 : classNum
     Model.alphaCell{n} = ALPHA;    
 end
 
-toc
+
 end
