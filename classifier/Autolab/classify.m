@@ -1,6 +1,6 @@
 function [y] = classify(Model, X)
 
-k = 7;
+k = 23;
 cellSize = 4;
 
 % Extract test HoG
