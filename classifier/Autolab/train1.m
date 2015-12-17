@@ -27,7 +27,7 @@ XTrainFeat=double(XTrainFeat);
 %display(Y);
     
 in_unit=D;
-mid_unit=600;
+mid_unit=497;
 out_unit=10;
 
 a=rands(mid_unit,1);
@@ -52,20 +52,23 @@ for i=1:1:N
         x=double(x);
         mid_t(1,j)=x* w1(j,:)'+a(j);
         %display(mid_t(1,j));
-        tempp=(2/(1+exp(-2*0.05*(mid_t(1,j)))))-1;
-        %tempp=1/(1+exp(-mid_t(1,j)));
+        %tempp=(2/(1+exp(-2*0.05*(mid_t(1,j)))))-1;
+        tempp=1/(1+exp(-mid_t(1,j)));
         display(tempp);
         mid_out(1,j)=tempp;
     end
     %output 
     y= mid_out*w2 +b';
+    for iii=1:1:out_unit
+        yy(1,iii)=1/(1+exp(-y(1,iii)));
+    end
     %calculate difference
-    e=Y(i,:)-y;
+    e=Y(i,:)-yy;
     %adjustment
     
     for j=1:1:mid_unit
-        temp=(2/(1+exp(-2*0.05*(mid_t(1,j)))))-1;
-        %temp=1/(1+exp(-mid_t(1,j)));
+        %temp=(2/(1+exp(-2*0.05*(mid_t(1,j)))))-1;
+        temp=1/(1+exp(-mid_t(1,j)));
         f(j)=temp*(1-temp);
     end
     for k=1:1:in_unit
@@ -85,10 +88,10 @@ for i=1:1:N
     mid_out=double(mid_out);
     adw2=mid_out'*e;
     adb=e';
-    w1=w1+0.0001*adw1';
-    a=a+0.0001*ada;
-    b=b+0.0001*adb;
-    w2=w2+0.0001*adw2;
+    w1=w1+0.1*adw1';
+    a=a+0.1*ada;
+    b=b+0.1*adb;
+    w2=w2+0.1*adw2;
     waitbar(i / N);
 
 end
